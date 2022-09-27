@@ -34,7 +34,7 @@ The process is as follows:
 
 
 
-Report
+### Report
 
 For our original model, using: 
 * SVM learning method
@@ -42,7 +42,7 @@ For our original model, using:
 * long window of 100
 * training set of 3 months
 
-![](svm_original_testing_report.JPG)
+![](Images/svm_original_testing_report.JPG)
 
 We see an accuracy of 50 or below, which is not very good, similar to a random prediction.
 
@@ -50,7 +50,7 @@ We see in our recall value only 4% of sell predictions (-1.0) correctly predicte
 
 Perhaps the SVM is not an appropriate model here.
 
-![](svm_actual_vs_strategy.png)
+![](Images/svm_actual_vs_strategy.png)
 
 
 
@@ -60,41 +60,51 @@ Perhaps the SVM is not an appropriate model here.
 
 ### What impact resulted from increasing or decreasing the training window?
 
-For the first tuned model, I use:
+
+
+For the first tuned model, I increased the training set to 6 months:
 * SVM learning method
 * short window of 4
 * long window of 100
 * training set of 6 months
 
-![](svm_6month_testing_report.JPG)
+![](Images/svm_6month_testing_report.JPG)
 
-![](svm_actual_vs_strategy_6m.png)
+![](Images/svm_actual_vs_strategy_6m.png)
+
+Returns from the strategy seems to have improved by increaing the training window from 3 to 6 months. The latter half of 2021 sees greater returns.
+
+Precision remains about the same compared to the original model. So too accuracy, with only a 1% increase. Recall for the sell signal decreased by 2%, and for buy increased by 2%. Overall the reports for each model are very similar.
 
 
 ### What impact resulted from increasing or decreasing either or both of the SMA windows?
 
-For the second tuned model, I use:
+For the second tuned model, I decreased the long window to 50 days:
 * SVM learning method
 * short window of 4
 * long window of 50
 * training set of 3 months
 
-![](svm_long50_testing_report.JPG)
+![](Images/svm_long50_testing_report.JPG)
 
-![](svm_actual_vs_strategy_long_50.png)
+![](Images/svm_actual_vs_strategy_long_50.png)
+
+The cumulative product plot shows a decrease from our original model, where now strategy returns are on par with actual returns.
+
+In the report we see similar precision scores, the same acuracy scores, but an increase in the buy signal recall to 13% coupled with a decrease in sell signal recall to 86%
 
 
 ## New Machine Learning Classifier
 
 For the new model I use Logistic Regression.
 
-![](lr_training_report.JPG)
+![](Images/lr_training_report.JPG)
 
 In the logistic regression model, accuracy remains about the same as the baseline model at 50%. Recall, however, was improved for both buy and sell signalls - 33% and 66% respectively.
 
-![](lr_actual_vs_strategy.png)
+![](Images/lr_actual_vs_strategy.png)
 
 Strategy Returns for the Logistic Regression model were outperforming Actual until the end of 2021 when our strategy starts to move in the opposite direction. 
 Therefore, this model seemed to perform worse than the baseline model.
 
-Overqall, the model with the best performance, as seen in the cumulative product of the actual returns vs. the strategy , is the first tuned model ( with a training set increased to 6 months).
+Overall, the model with the best performance, as seen in the cumulative product of the actual returns vs. the strategy , is the first tuned model ( with a training set increased to 6 months).
